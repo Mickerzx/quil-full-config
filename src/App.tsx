@@ -1,26 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import HTMLEditor from './components/HTMLEditor';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+
+    const [value, setValue] = useState<string>('')
+    const [handleOk, setHandleOk] = useState(false)
+
+    return (
+        <div className='App'>
+            <div className='container'>
+                <HTMLEditor setHandleOk={() => setHandleOk(false)} handleOk={handleOk} onChange={setValue}/>
+                <button className='button' onClick={() => setHandleOk(true)}>Сохранить</button>
+                <div className='content'>
+                    <h1>Content</h1>
+                    <div className='ql-editor' dangerouslySetInnerHTML={{__html: value}}/>
+                </div>
+            </div>
+        </div>
+    );
+};
 
 export default App;
